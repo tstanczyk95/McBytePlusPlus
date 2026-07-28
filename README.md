@@ -8,5 +8,5 @@ Official implementation of the paper "Training-Free Long-Term Multi-Object Track
 You can see in the demo below that despite not performing any training or tuning on the used sequence, the subjects are well tracked and the majority of them is re-recognized upon leaving and entering back the scene (old IDs assigned). Even more improvements coming soon.
 
 <p align="center">
-  <img src="assets/basketball_sharks_demo.gif" alt="Basketball Sharks demo">
+  <img src="basketball_sharks_demo.gif" alt="Basketball Sharks demo">
 </p>
