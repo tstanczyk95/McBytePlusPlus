@@ -1,7 +1,15 @@
 # McByte++
 Faster, more precise, improved version of [McByte](https://github.com/tstanczyk95/McByte).
 
-Official implementation of the paper "Training-Free Long-Term Multi-Object Tracking for Sports Video Analytics".
+<br/>
+
+Official implementation of the paper:
+
+>**[Training-Free Long-Term Multi-Object Tracking for Sports Video Analytics](https://arxiv.org/pdf/2608.15688)**
+>
+>[Tomasz Stanczyk](https://www.linkedin.com/in/tomasz-stanczyk/) (first author, code creator), Seongro Yoon, [Francois Bremond](https://www-sop.inria.fr/members/Francois.Bremond/)
+>
+>[*arxiv 2608.15688*](https://arxiv.org/abs/2608.15688)
 
 <p align="center">
   <a href="https://team.inria.fr/stars/">
@@ -12,7 +20,11 @@ Official implementation of the paper "Training-Free Long-Term Multi-Object Track
   </a>
 </p>
 
-**Code release coming soon, stay tuned!**
+<br/>
+
+**👉👉👉 Code release coming very soon, stay tuned! 👈👈👈**
+
+<br/>
 
 You can see in the demo below that despite not performing any training or tuning on the used sequence, the subjects are well tracked and the majority of them is re-recognized upon leaving and entering back the scene (old IDs assigned). Even more improvements coming soon.
 
