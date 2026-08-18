@@ -20,6 +20,8 @@ Official implementation of the paper:
   </a>
 </p>
 
+Designed and developed at Inria, in the <a href="https://team.inria.fr/stars/">STARS team</a>.
+
 <br/>
 
 **👉👉👉 Code release coming very soon, stay tuned! 👈👈👈**
