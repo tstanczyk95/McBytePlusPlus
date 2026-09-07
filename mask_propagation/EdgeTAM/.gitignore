@@ -1,0 +1,11 @@
+.vscode/
+.DS_Store
+__pycache__/
+*-checkpoint.ipynb
+.venv
+*.egg*
+build/*
+_C.*
+outputs/*
+coreml_models/*
+checkpoints/*.pt

@@ -33,3 +33,10 @@ You can see in the demo below that despite not performing any training or tuning
 <p align="center">
   <img src="basketball_sharks_demo.gif" alt="Basketball Sharks demo">
 </p>
+
+
+
+## Installation and models
+
+Please follow the complete guideline in [INSTALLATION.md](https://github.com/tstanczyk95/McBytePlusPlus/blob/main/INSTALLATION.md).
+<br/>
