@@ -1,5 +1,5 @@
 # McByte++
-Faster, more precise and improved version of [McByte](https://github.com/tstanczyk95/McByte).
+Faster and enhanced version of [McByte](https://github.com/tstanczyk95/McByte).
 
 What's new:
 - Person re-identification (re-ID) for recognizing subjects leaving and coming back to the scene;
