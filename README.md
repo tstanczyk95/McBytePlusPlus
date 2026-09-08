@@ -53,7 +53,7 @@ With re-ID:
 ```
 python tools/demo_track__with_reid.py --path path/to/your/input/frames
 ```
-Withtout re-ID:
+Without re-ID:
 ```
 python tools/demo_track__no_reid.py --path path/to/your/input/frames
 ```
@@ -98,7 +98,7 @@ python tools/demo_track__no_reid.py --path /your/path/dancetrack/test/dancetrack
 
 ## McByte vs. McByte++ performance comparison
 
-As presented below, McByte++ is faster and enhanced version of McByte, especially when used with re-ID. Using re-ID involves additional computation, hence both, the variant with and without it is provided and compared.
+As presented below, McByte++ is faster and enhanced version of McByte, especially when used with re-ID. Using re-ID involves additional computation, hence both, the variant with and without it is provided and compared. The variant with offline post-processing was performed with GTA-link's default parameters.
 
 ### SoccerNet-tracking 2022 - test split
 
@@ -106,8 +106,8 @@ As presented below, McByte++ is faster and enhanced version of McByte, especiall
 |---|---:|---:|---:|---:|
 | McByte | 85.0 | 79.9 | 96.8 | 1.04 |
 | McByte++, no re-ID | 84.1 | 78.9 | 97.1 | 10.71 |
-| McByte++, with re-ID | 87.5 | 84.5 | 97.1 | 8.69 |
-| McByte++ (no re-ID) with GTA-link post-processing | 88.6 | 87.2 | 97.1 | 7.46 |
+| McByte++, with online re-ID | 87.5 | 84.5 | 97.1 | 8.69 |
+| McByte++, with offline re-ID post-processing (GTA-link) | 88.6 | 87.2 | 97.1 | 7.46 |
 
 ### SportsMOT - test split
 
@@ -115,8 +115,8 @@ As presented below, McByte++ is faster and enhanced version of McByte, especiall
 |---|---:|---:|---:|---:|
 | McByte | 76.9 | 77.5 | 97.2 | 3.60 |
 | McByte++, no re-ID | 75.8 | 76.0 | 96.9 | 19.08 |
-| McByte++, with re-ID | 79.9 | 83.6 | 96.9 | 14.57 |
-| McByte++ (no re-ID) with GTA-link post-processing | 81.5 | 86.0 | 96.8 | 12.49 |
+| McByte++, with online re-ID | 79.9 | 83.6 | 96.9 | 14.57 |
+| McByte++, with offline re-ID post-processing (GTA-link) | 81.5 | 86.0 | 96.8 | 12.49 |
 
 ### SoccerNet-tracking - challenge 2023 split
 
@@ -126,8 +126,8 @@ SportsMOT-pretrained YOLOX detector (McByte++ default setting).
 |---|---:|---:|---:|---:|
 | McByte | 64.1 | 76.5 | 81.8 | 1.46 |
 | McByte++, no re-ID | 62.4 | 74.1 | 81.7 | 15.05 |
-| McByte++, with re-ID | 64.3 | 78.6 | 81.8 | 11.13 |
-| McByte++ (no re-ID) with GTA-link post-processing | 65.7 | 80.7 | 81.7 | 10.06 |
+| McByte++, with online re-ID | 64.3 | 78.6 | 81.8 | 11.13 |
+| McByte++, with offline re-ID post-processing (GTA-link) | 65.7 | 80.7 | 81.7 | 10.06 |
 
 ### DanceTrack - test split
 
@@ -135,7 +135,7 @@ SportsMOT-pretrained YOLOX detector (McByte++ default setting).
 |---|---:|---:|---:|---:|
 | McByte | 67.1 | 68.1 | 92.9 | 2.00 |
 | McByte++, no re-ID | 64.4 | 66.0 | 92.2 | 26.44 |
-| McByte++, with re-ID | 64.5 | 67.8 | 92.2 | 20.23 |
+| McByte++, with online re-ID | 64.5 | 67.8 | 92.2 | 20.23 |
 
 <i>*In case of DanceTrack the re-ID doesn't help as much, because people stay mostly on the scene. Furthermore, the used re-ID model was primarily trained on sports such as soccer, basketball, volleyball. On the other hand, the speed up on DanceTrack between McByte and McByte++ is the most remarkable.</i>
 
