@@ -98,7 +98,9 @@ python tools/demo_track__no_reid.py --path /your/path/dancetrack/test/dancetrack
 
 ## McByte vs. McByte++ performance comparison
 
-As presented below, McByte++ is faster and enhanced version of McByte, especially when used with re-ID. Using re-ID involves additional computation, hence both, the variant with and without it is provided and compared. The variant with offline post-processing was performed with GTA-link's default parameters.
+As presented below, McByte++ is a faster and enhanced version of McByte, especially when used with re-ID. Using re-ID involves additional computation, hence both, the variant with and without it is provided and compared. 
+
+McByte++ performs long-term re-ID online, during tracking, without requiring offline post-processing. For completeness, we additionally report results obtained by applying an external offline global association method to the McByte++ outputs; these results are explicitly marked in the tables below. See the "Re-ID" joining section below for more details on the re-ID mechanism and model.
 
 ### SoccerNet-tracking 2022 - test split
 
@@ -107,7 +109,7 @@ As presented below, McByte++ is faster and enhanced version of McByte, especiall
 | McByte | 85.0 | 79.9 | 96.8 | 1.04 |
 | McByte++, no re-ID | 84.1 | 78.9 | 97.1 | 10.71 |
 | McByte++, with online re-ID | 87.5 | 84.5 | 97.1 | 8.69 |
-| McByte++, with offline re-ID post-processing (GTA-link) | 88.6 | 87.2 | 97.1 | 7.46 |
+| McByte++ + GTA-link (offline post-processing) | 88.6 | 87.2 | 97.1 | 7.46 |
 
 ### SportsMOT - test split
 
@@ -116,7 +118,7 @@ As presented below, McByte++ is faster and enhanced version of McByte, especiall
 | McByte | 76.9 | 77.5 | 97.2 | 3.60 |
 | McByte++, no re-ID | 75.8 | 76.0 | 96.9 | 19.08 |
 | McByte++, with online re-ID | 79.9 | 83.6 | 96.9 | 14.57 |
-| McByte++, with offline re-ID post-processing (GTA-link) | 81.5 | 86.0 | 96.8 | 12.49 |
+| McByte++ + GTA-link (offline post-processing) | 81.5 | 86.0 | 96.8 | 12.49 |
 
 ### SoccerNet-tracking - challenge 2023 split
 
@@ -127,7 +129,7 @@ SportsMOT-pretrained YOLOX detector (McByte++ default setting).
 | McByte | 64.1 | 76.5 | 81.8 | 1.46 |
 | McByte++, no re-ID | 62.4 | 74.1 | 81.7 | 15.05 |
 | McByte++, with online re-ID | 64.3 | 78.6 | 81.8 | 11.13 |
-| McByte++, with offline re-ID post-processing (GTA-link) | 65.7 | 80.7 | 81.7 | 10.06 |
+| McByte++ + GTA-link (offline post-processing) | 65.7 | 80.7 | 81.7 | 10.06 |
 
 ### DanceTrack - test split
 
@@ -136,27 +138,32 @@ SportsMOT-pretrained YOLOX detector (McByte++ default setting).
 | McByte | 67.1 | 68.1 | 92.9 | 2.00 |
 | McByte++, no re-ID | 64.4 | 66.0 | 92.2 | 26.44 |
 | McByte++, with online re-ID | 64.5 | 67.8 | 92.2 | 20.23 |
+| McByte++ + GTA-link (offline post-processing) | 65.2 | 68.3 | 91.5 | 16.55 |
 
-<i>*In case of DanceTrack the re-ID doesn't help as much, because people stay mostly on the scene. Furthermore, the used re-ID model was primarily trained on sports such as soccer, basketball, volleyball. On the other hand, the speed up on DanceTrack between McByte and McByte++ is the most remarkable.</i>
+<i>*In case of DanceTrack, the re-ID doesn't help as much, because people stay mostly on the scene. Furthermore, the used re-ID model was primarily trained on sports such as soccer, basketball, volleyball. On the other hand, the speed up on DanceTrack between McByte and McByte++ is the most remarkable one.</i>
 
-<i>**FPS was measured on a single NVIDIA H100 GPU. In case of GTA-link post-processing, the full time was measured and used as the score denominator. FPS measurement was performed exclusively for tracking, excluding the detection part. Detections on the evaluated datasets were extracted separately and fed to McByte.</i>
+<i>**FPS was measured on a single NVIDIA H100 GPU. In case of GTA-link post-processing, the total processing time was measured and used as the score denominator (frames per **second**). FPS measurement was performed exclusively for tracking, excluding the detection part. Detections on the evaluated datasets were extracted separately and fed to McByte.</i>
 
 <i>***Even more optimized (faster) version is already in preparation.</i>
 
 
+
+
 ## Re-ID joining
-
-A model pre-trained on sport datasets is used. The weights originally come from [GTA-link](https://github.com/sjc042/gta-link/). While GTA-link works based on post-processing, McByte++ performs tracklet joining on the go (online), in parallel to tracking, with no post-processing. However, it is possible to run GTA-link on the McByte++ output to further improve its performance, as listed in the paper. It can be applied both on the non-re-iD version output (more gain) and on the online re-ID ouput (less gain expected).
-
-You can also train [Deep-person-reid (torchreid)](https://github.com/kaiyangzhou/deep-person-reid) on your data and plug it directly into McByte++ to receive even stronger performance.
 
 ### Tracklet joining and thresholds (<i>demo_track__with_reid.py only</i>)
 
-The re-ID is used to join the tracklets of the subjects which leave and come back to the scene. Every time a new subject appears on the scene (withing the camera view/frame), their visual features are computed and compared with those of the already tracked entities (existing tracklets), who are currently missing on the scene. If the cosine distance between the new entity and already tracked entity is high enough, i.e. above or equal the set threshold <i>--reid_sim_thresh</i>, the new entity is considered the existing one and receives the same ID. 
+The re-ID is used to join the tracklets of the subjects which leave and come back to the scene. Every time a new subject appears on the scene (within the camera view/frame), their visual features are computed and compared with those of the already tracked entities (existing tracklets), who are currently missing on the scene. If the cosine similarity between the new entity and an already tracked entity is high enough, i.e. above or equal to the set threshold <i>--reid_sim_thresh</i>, the new entity is considered as the existing one and receives the same ID.
 
-E.g. subject with ID=3 leaves the scene. A new subject appears. If they are considered visually similar enough, the new subjects obtains ID=3. Otherwise, they receive a new ID, next which hasn't been used yet, e.g. ID=25.
+E.g. subject with ID=3 leaves the scene. A new subject appears. If they are considered visually similar enough, the new subject obtains ID=3. Otherwise, they receive a new ID which hasn't been used yet, e.g. ID=25.
 
 The default threshold, used together with the sport re-ID model (sports_model.pth.tar-60) is set by default as 0.8 (minimal cosine similarity of 0.8 required), as this is the optimal value found on the evaluated datasets with this model. If you change your data, you might want to try different values of this threshold. If you train your own re-ID model on your data, you will most likely need to update this value based on the observed performance (e.g. visual outputs or re-ID joining logs in the console).
+
+### Re-ID model
+
+The default sports re-ID weights originate from [GTA-link](https://github.com/sjc042/gta-link). McByte++ uses this re-ID model within its own online identity-recovery mechanism; GTA-link itself is an offline post-processing method and is not required to run McByte++. For comparison, we additionally report results obtained by applying GTA-link to McByte++ outputs.
+
+You can also train [Deep-person-reid (torchreid)](https://github.com/kaiyangzhou/deep-person-reid) on your data and plug it directly into McByte++ to receive even stronger performance.
 
 
 ## Mask propagation note
