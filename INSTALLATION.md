@@ -76,7 +76,7 @@ If you cannot reach some of this model, then please see the last section of this
 
 ## Person re-ID (optional, yet encouraged)
 
-Install the re-ID for tracklet joining:
+Install [the re-ID(torchreid)](https://github.com/kaiyangzhou/deep-person-reid) for tracklet re-ID joining:
 
 ```
 cd ../../deep-person-reid

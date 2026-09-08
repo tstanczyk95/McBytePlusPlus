@@ -85,7 +85,6 @@ def make_parser():
     parser.add_argument("--cmc_interval", default=1, type=int, help="The interval of frames between cmc computations. 1 means computing cmc every frame")
     parser.add_argument("--cmc_downscale", type=int, default=4)
 
-    parser.add_argument("--start_frame_no", type=int, default=1, help="starting frame file number (counting from 1)")
     parser.add_argument("--vis_type", default="basic", type=str, help="visualization type, with OR without detections and tracklets before Kalman filter update OR no visualization: full | basic | no_vis")
 
     parser.add_argument("--with_mask_removal", type=bool, default=False)
@@ -241,8 +240,6 @@ def image_demo(det_source, vis_folder, current_time, args):
         files = [args.path]
     files.sort()
 
-    files = files[args.start_frame_no-1:]
-
     ### For the info logging file save ###
     timestamp = time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
     save_folder = osp.join(vis_folder, timestamp)
@@ -280,9 +277,9 @@ def image_demo(det_source, vis_folder, current_time, args):
     for frame_id, img_path in enumerate(files, 1):
         if dets_from_file:
             if yolox_file_dets:
-                outputs, img_info = get_yolox_detections(img_path, frame_id + args.start_frame_no-1, det_list)
+                outputs, img_info = get_yolox_detections(img_path, frame_id, det_list)
             else:
-                outputs, img_info = get_detections(img_path, frame_id + args.start_frame_no-1, det_list)
+                outputs, img_info = get_detections(img_path, frame_id, det_list)
         else:
             outputs, img_info = predictor.inference(img_path)
         
