@@ -33,8 +33,6 @@ Official implementation of the paper:
 
 Designed and developed at Inria, in the <a href="https://team.inria.fr/stars/">STARS team</a>.
 
-<br/>
-
 ## Abstract
 Long-term multi-object tracking in sports remains challenging due to frequent occlusions, rapid camera motion, and repeated player reappearances. We introduce McByte++, a training-free tracking-by-detection framework that integrates lightweight mask propagation, conditional camera motion compensation, and online re-identification within a unified pipeline. Compared to its predecessor, McByte++ substantially improves runtime efficiency while enhancing identity preservation. On SoccerNet-tracking and SportsMOT benchmarks, McByte++ achieves up to +3.0 HOTA and +6.1 IDF1 improvements over the original McByte in the online setting, with further gains when combined with offline global association. Replacing heavy segmentation components and optimizing motion modeling yields up to an order-of-magnitude speed increase. All results are obtained without detector retraining or dataset-specific tuning.
 
@@ -67,7 +65,7 @@ Output will be located in: <i>McBytePlusPlus/YOLOX_outputs/yolox_x_mix_det/track
 - <i>--vis_type</i> - visualization type, it enables saving separately: frames with masks and tracklets, frames with detections and frames with tracklets before Kalman filter update. Skipping the visualization, while keeing the text (records) output is also possible. Recognized values: <i>full</i> (frame/image input only), <i>basic</i>, <i>no_vis</i>. Default: <i>basic</i>.
 - <i>-f</i> | <i>--exp_file</i> - the name of the YOLOX detector experiment (architecture and parameters) file. Although several ones are possible, we recommend staying with the default: <i>exps/example/mot/yolox_x_mix_det.py</i>. 
 - <i>-c</i> | <i>--ckpt</i> - the name of the object detector pretrained weights file (the checkpoint). It must match the architecture from the experiment file above (e.g. YOLOX X). Default: <i>pretrained/yolox_x_sports_mix.pth.tar</i>.
-- <i>--det_path</i> - path to the text file with detections. Default: None. If specified, detector-related arguments will not be considered. See the expected format [here](https://github.com/tstanczyk95/McByte/blob/main/tools/demo_track.py#L169) or slightly adjust it to yours.
+- <i>--det_path</i> - path to the text file with detections. Default: None. If specified, detector-related arguments will not be considered. See the expected format [here](https://github.com/tstanczyk95/McBytePlusPlus/blob/main/tools/demo_track__with_reid.py#L332) or slightly adjust it to yours.
 - <i>--cmc_downscale</i> - the downscale factor of the camera motion compensation input. The higher the factor, the less computing is required, but also less precision. The most optimal value for the evaluated datasets was 4 (set as default).
 
 **Re-ID arguments (<i>demo_track__with_reid.py only</i>):**
