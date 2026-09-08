@@ -142,7 +142,7 @@ sam_models
 YOLOX_outputs
 
 # data dirs
-datasets/
+/datasets/
 
 # - - - - - - - - - - - -
 

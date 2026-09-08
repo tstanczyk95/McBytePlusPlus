@@ -44,7 +44,7 @@ python3 -m pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirect
 pip3 install cython_bbox
 pip3 install --upgrade numpy==1.24.4
 ```
-<i>(In case see an error in red about pip's dependency resolver, do not worry about it, you will be able to proceed and still finish the installation and run Mcbyte)</i>
+<i>(In case see an error in red about pip's dependency resolver, do not worry about it, you will be able to proceed and still finish the installation and run Mcbyte++)</i>
 
 Make directory for the pretrained detector ([YOLOX](https://github.com/Megvii-BaseDetection/YOLOX), already installed) models:
 ```
@@ -72,11 +72,11 @@ Download the model weights from the original EdgeTAM [repository](https://github
 ```
 mask_propagation/EdgeTAM/checkpoints/
 ```
-If you cannot reach some of this model, then please see the last section of this page.
+If you cannot reach this model, then please see the last section of this page.
 
 ## Person re-ID (optional, yet encouraged)
 
-Install [the re-ID(torchreid)](https://github.com/kaiyangzhou/deep-person-reid) for tracklet re-ID joining:
+Install the [re-ID (torchreid)](https://github.com/kaiyangzhou/deep-person-reid) for tracklet re-ID joining:
 
 ```
 cd ../../deep-person-reid
@@ -89,6 +89,7 @@ Download the model weights from the original GTA-link [repository](https://githu
 ```
 mkdir pretrained/
 ```
+If you cannot reach this model, then please see the last section of this page.
 
 
 ## Error handling
